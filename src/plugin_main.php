@@ -1,5 +1,5 @@
 <?php
-$api = $plugin->getAPI(file_get_contents('../config.json'));
+$api = new FoxCloud\API(file_get_contents('../config.json'));
 // Verifico che la configurazione sia OK
 $plugin->addEvent('pageLoad', 'before', function() {
   if (empty($api->getConfig()->easteregg)) {
