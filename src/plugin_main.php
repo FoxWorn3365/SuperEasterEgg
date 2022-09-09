@@ -1,14 +1,16 @@
 <?php
-$api = new FoxCloud\API(file_get_contents('../config.json'));
+$api = new FoxCloud\API(file_get_contents('config.json'));
+
 // Verifico che la configurazione sia OK
-$plugin->addEvent('pageLoad', 'before', function() {
+$plugin->addEvent('pageLoad', 'before', function() use($api, $plugin) {
   if (empty($api->getConfig()->easter_egg)) {
+    $plugin->log("[#ERROR]", "[SuperEE] Generazione di una nuova configurazione! - Name: " . $api->getName());
     $list = array('tbbt' => true, 'tacos' => true, 'rickroll' => true, 'scp' => true);
     $api->editConfig(json_encode(array('enabled' => true, 'easter_egg' => $list)));
   }
 });
 
-$plugin->addEvent('containRequest', 'after', function() {
+$plugin->addEvent('containRequest', 'after', function() use($api, $plugin) {
   $plugin->log("", "[SuperEE] Plugin caricato con successo sulla pagina corrente!");
 ?>
 <html>
@@ -56,6 +58,8 @@ $plugin->addEvent('containRequest', 'after', function() {
   } else if (document.getElementById('renameFile')) {
     var id = 'renameFile';
   }
+
+  console.log("Selected ID S0: " + id);
    
   if (id !== "") {
     document.getElementById(id).addEventListener('input', () => {
@@ -66,15 +70,16 @@ $plugin->addEvent('containRequest', 'after', function() {
       } else if (document.getElementById(id).value.toUpperCase().includes("LOL") && document.getElementById('tacos')) {
         document.getElementById('tacos').play();
       } else if (document.getElementById(id).value.toUpperCase().includes("SCP") && document.getElementById('scp')) {
-        document.getElementById('iscp').play();
+        document.getElementById('scp').play();
       } else {
         document.getElementById('scp').pause();
         document.getElementById('tacos').pause();
         document.getElementById('rickroll').pause();
         document.getElementById('tbbt').pause();
       }
-    }
+    });
   }
   </script>
+</html>
 <?php
 }, array('/rename/', '/new/', '/createDir/'));
