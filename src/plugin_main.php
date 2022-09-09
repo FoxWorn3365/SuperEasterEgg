@@ -1,16 +1,13 @@
 <?php
 $api = $plugin->getAPI(file_get_contents('../config.json'));
 
-// Verifico che la configurazione sia OK
-$plugin->addEvent('pageLoad', 'before', function() {
-  if (empty($api->getConfig()->easteregg)) {
+$plugin->addEvent('pageLoad', 'after', function() {
+  $plugin->log("", "[SuperEE] Plugin caricato con successo sulla pagina corrente!");
+  
+  if (empty($api->getConfig()->easter_egg)) {
     $list = array('tbbt' => true, 'tacos' => true, 'rickroll' => true, 'scp' => true);
     $api->editConfig(json_encode(array('enabled' => true, 'easter_egg' => $list)));
   }
-});
-
-$plugin->addEvent('containRequest', 'after', function() {
-  $plugin->log("", "[SuperEE] Plugin caricato con successo sulla pagina corrente!");
 ?>
 <html>
 <?php
@@ -78,4 +75,4 @@ $plugin->addEvent('containRequest', 'after', function() {
   }
   </script>
 <?php
-}, array('/rename/', '/new/', '/createDir/'));
+});
