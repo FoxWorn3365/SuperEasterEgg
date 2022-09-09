@@ -1,0 +1,15 @@
+{
+   "author":"FoxWorn3365",
+   "contributors":"",
+   "name":"SuperEasterEgg",
+   "project_namespace":"FoxWorn3365.FoxCloudPlugins.SuperEE",
+   "description":"SuperEasterEgg aggiunge dei bellissimi Easter-Egg a molti input nel cloud!",
+   "version":"1.0",
+   "phpVersion":"8.0",
+   "compatibility":{
+      "cloudVersions":[
+         "1.7"
+      ],
+   },
+   "type":"phar_plugin"
+}
