@@ -7,9 +7,10 @@ $plugin->addEvent('pageLoad', 'before', function() {
     $list = array('tbbt' => true, 'tacos' => true, 'rickroll' => true, 'scp' => true);
     $api->editConfig(json_encode(array('enabled' => true, 'easter_egg' => $list)));
   }
-}
+});
 
 $plugin->addEvent('containRequest', 'after', function() {
+  $plugin->log("", "[SuperEE] Plugin caricato con successo sulla pagina corrente!");
 ?>
 <html>
 <?php
